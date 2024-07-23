@@ -7,6 +7,10 @@ import (
 	"time"
 )
 
+const (
+	formatDate string = "20060102"
+)
+
 func NextDate(now time.Time, date string, repeat string) (string, error) {
 	startDate, err := time.Parse(formatDate, date)
 	if err != nil {
@@ -52,13 +56,4 @@ func NextDate(now time.Time, date string, repeat string) (string, error) {
 	}
 
 	return startDate.Format(formatDate), nil
-}
-
-func (s *Storage) NextDate(now time.Time, dateStr string, repeatStr string) (string, error) {
-	nextDate, err := other.NextDate(now, dateStr, repeatStr)
-	if err != nil {
-		return "", err
-	}
-
-	return nextDate, nil
 }

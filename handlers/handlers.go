@@ -13,6 +13,10 @@ import (
 	"github.com/Arukasnobnes/go_final_project/support"
 )
 
+const (
+	formatDate string = "20060102"
+)
+
 type Handler struct {
 	Storage *storage.Storage
 }
@@ -46,7 +50,7 @@ func (h *Handler) TaskHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if task.Date == "" || task.Date < time.Now().Format(formatDate) {
-			task.Date = time.Now().Format(formatDate)
+			task.Date = time.Now().Format(constants.formatDate)
 		}
 
 		if task.Repeat == "d 1" || task.Repeat == "d 5" || task.Repeat == "d 3" {
