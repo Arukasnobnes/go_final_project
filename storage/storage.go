@@ -8,10 +8,6 @@ import (
 	"github.com/Arukasnobnes/go_final_project/support"
 )
 
-const (
-	numTask int = 50
-)
-
 type Storage struct {
 	DB *sql.DB
 }
@@ -80,7 +76,7 @@ func (s *Storage) DeleteTask(id string) error {
 }
 
 func (s *Storage) GetTasks() ([]models.Task, error) {
-	rows, err := s.DB.Query(`SELECT id, date, title, comment  FROM scheduler ORDER BY date ASC LIMIT numTask`)
+	rows, err := s.DB.Query(`SELECT * FROM scheduler ORDER BY date ASC LIMIT 50`)
 	if err != nil {
 		return nil, err
 	}

@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	formatDate string = "20060102"
+	formatDate = "20060102"
 )
 
 func NextDate(now time.Time, date string, repeat string) (string, error) {

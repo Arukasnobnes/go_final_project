@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	formatDate string = "20060102"
+	formatDate = "20060102"
 )
 
 type Handler struct {
