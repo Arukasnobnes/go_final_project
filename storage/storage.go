@@ -2,10 +2,8 @@ package storage
 
 import (
 	"database/sql"
-	"time"
 
 	"github.com/Arukasnobnes/go_final_project/models"
-	"github.com/Arukasnobnes/go_final_project/other"
 )
 
 type Storage struct {
@@ -97,13 +95,4 @@ func (s *Storage) GetTasks() ([]models.Task, error) {
 	}
 
 	return tasks, nil
-}
-
-func (s *Storage) NextDate(now time.Time, dateStr string, repeatStr string) (string, error) {
-	nextDate, err := other.NextDate(now, dateStr, repeatStr)
-	if err != nil {
-		return "", err
-	}
-
-	return nextDate, nil
 }

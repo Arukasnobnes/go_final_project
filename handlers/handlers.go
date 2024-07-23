@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/Arukasnobnes/go_final_project/models"
-	"github.com/Arukasnobnes/go_final_project/other"
 	"github.com/Arukasnobnes/go_final_project/storage"
+	"github.com/Arukasnobnes/go_final_project/support"
 )
 
 type Handler struct {
@@ -52,7 +52,7 @@ func (h *Handler) TaskHandler(w http.ResponseWriter, r *http.Request) {
 		if task.Repeat == "d 1" || task.Repeat == "d 5" || task.Repeat == "d 3" {
 			task.Date = time.Now().Format("20060102")
 		} else if task.Repeat != "" {
-			task.Date, err = other.NextDate(time.Now(), task.Date, task.Repeat)
+			task.Date, err = support.NextDate(time.Now(), task.Date, task.Repeat)
 			if err != nil {
 				http.Error(w, `{"error":"Invalid repeat rule"}`, http.StatusBadRequest)
 				return
@@ -125,7 +125,7 @@ func (h *Handler) TaskHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if task.Repeat != "" {
-			task.Date, err = other.NextDate(time.Now(), task.Date, task.Repeat)
+			task.Date, err = support.NextDate(time.Now(), task.Date, task.Repeat)
 			if err != nil {
 				http.Error(w, `{"error":"Invalid repeat rule"}`, http.StatusBadRequest)
 				return
@@ -231,7 +231,7 @@ func (h *Handler) TaskDoneHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	} else {
-		nextDate, err := other.NextDate(time.Now(), task.Date, task.Repeat)
+		nextDate, err := support.NextDate(time.Now(), task.Date, task.Repeat)
 		if err != nil {
 			http.Error(w, `{"error":"Failed to calculate next date"}`, http.StatusInternalServerError)
 			return

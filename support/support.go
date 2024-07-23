@@ -1,4 +1,4 @@
-package other
+package support
 
 import (
 	"errors"
@@ -52,4 +52,13 @@ func NextDate(now time.Time, date string, repeat string) (string, error) {
 	}
 
 	return startDate.Format("20060102"), nil
+}
+
+func (s *Storage) NextDate(now time.Time, dateStr string, repeatStr string) (string, error) {
+	nextDate, err := other.NextDate(now, dateStr, repeatStr)
+	if err != nil {
+		return "", err
+	}
+
+	return nextDate, nil
 }
