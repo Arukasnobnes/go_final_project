@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	numTask = "50"
+	NumTask = "50"
 )
 
 type Storage struct {
@@ -80,7 +80,7 @@ func (s *Storage) DeleteTask(id string) error {
 }
 
 func (s *Storage) GetTasks() ([]models.Task, error) {
-	rows, err := s.DB.Query(`SELECT id, date, title, comment, repeat FROM scheduler ORDER BY date ASC LIMIT` + numTask)
+	rows, err := s.DB.Query(`SELECT id, date, title, comment, repeat FROM scheduler ORDER BY date ASC LIMIT ` + NumTask)
 	if err != nil {
 		return nil, err
 	}
