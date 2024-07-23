@@ -38,19 +38,19 @@ func (h *Handler) TaskHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if task.Date != "" {
-			_, err = time.Parse("20060102", task.Date)
+			_, err = time.Parse(formatDate, task.Date)
 			if err != nil {
 				http.Error(w, `{"error":"Invalid date format"}`, http.StatusBadRequest)
 				return
 			}
 		}
 
-		if task.Date == "" || task.Date < time.Now().Format("20060102") {
-			task.Date = time.Now().Format("20060102")
+		if task.Date == "" || task.Date < time.Now().Format(formatDate) {
+			task.Date = time.Now().Format(formatDate)
 		}
 
 		if task.Repeat == "d 1" || task.Repeat == "d 5" || task.Repeat == "d 3" {
-			task.Date = time.Now().Format("20060102")
+			task.Date = time.Now().Format(formatDate)
 		} else if task.Repeat != "" {
 			task.Date, err = support.NextDate(time.Now(), task.Date, task.Repeat)
 			if err != nil {
@@ -113,15 +113,15 @@ func (h *Handler) TaskHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if task.Date != "" {
-			_, err = time.Parse("20060102", task.Date)
+			_, err = time.Parse(formatDate, task.Date)
 			if err != nil {
 				http.Error(w, `{"error":"Invalid date format"}`, http.StatusBadRequest)
 				return
 			}
 		}
 
-		if task.Date == "" || task.Date < time.Now().Format("20060102") {
-			task.Date = time.Now().Format("20060102")
+		if task.Date == "" || task.Date < time.Now().Format(formatDate) {
+			task.Date = time.Now().Format(formatDate)
 		}
 
 		if task.Repeat != "" {
@@ -187,7 +187,7 @@ func (h *Handler) NextDateHandler(w http.ResponseWriter, r *http.Request) {
 	dateStr := r.FormValue("date")
 	repeatStr := r.FormValue("repeat")
 
-	now, err := time.Parse("20060102", nowStr)
+	now, err := time.Parse(formatDate, nowStr)
 	if err != nil {
 		http.Error(w, "Invalid now parameter", http.StatusBadRequest)
 		return
