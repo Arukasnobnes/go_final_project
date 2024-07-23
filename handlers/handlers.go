@@ -50,7 +50,7 @@ func (h *Handler) TaskHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if task.Date == "" || task.Date < time.Now().Format(formatDate) {
-			task.Date = time.Now().Format(constants.formatDate)
+			task.Date = time.Now().Format(formatDate)
 		}
 
 		if task.Repeat == "d 1" || task.Repeat == "d 5" || task.Repeat == "d 3" {
